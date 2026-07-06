@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browser DevTools Clone | Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div id="sidebarRoot"></div>
+
+      <main class="main-content">
+        <div class="topbar">
+          <div>
+            <p class="page-kicker">Browser DevTools Clone</p>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-description">
+              A multi-page developer tools workspace inspecting one shared live
+              iframe target.
+            </p>
+          </div>
+          <div class="status-region" aria-live="polite"></div>
+        </div>
+
+        <section class="dashboard-hero">
+          <div class="panel hero-panel">
+            <div class="panel-body">
+              <span class="badge-soft">localStorage workspace</span>
+              <h2 class="mt-3 mb-2">
+                Inspect, edit, evaluate, capture, and measure a real target
+                page.
+              </h2>
+              <p class="page-description">
+                Every panel uses the same editable HTML document rendered
+                through iframe srcdoc, so changes can persist across the DOM
+                Inspector, CSS Inspector, Console, Network Viewer, and
+                Performance Monitor.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn-cyber" id="loadSampleBtn" type="button">
+                  Load sample target page
+                </button>
+                <button
+                  class="btn btn-ghost"
+                  id="editHtmlBtn"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#htmlEditorModal"
+                >
+                  Edit target HTML
+                </button>
+                <button
+                  class="btn btn-outline-danger"
+                  id="resetTargetBtn"
+                  type="button"
+                >
+                  Reset target page
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-grid" id="dashboardStats"></div>
+        </section>
+
+        <section class="devtools-grid mb-3">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Live Target Preview</h2>
+                <p class="panel-subtitle">Rendered from workspace.targetHtml</p>
+              </div>
+              <span class="badge-soft">srcdoc</span>
+            </div>
+            <div class="panel-body">
+              <div id="targetPreview" class="preview-frame-wrap"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Recent Activity</h2>
+                <p class="panel-subtitle">Workspace actions across panels</p>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="activity-list" id="activityList"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="row g-3">
+          <div class="col-md-6 col-xl-4">
+            <a class="action-card" href="dom-inspector.html">
+              <div class="card-icon">{}</div>
+              <h3>DOM Inspector</h3>
+              <p>
+                Render and edit the real iframe document tree, attributes, text,
+                and elements.
+              </p>
+            </a>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <a class="action-card" href="css-inspector.html">
+              <div class="card-icon">#</div>
+              <h3>CSS Inspector</h3>
+              <p>
+                Inspect computed styles, box model values, inline styles,
+                classes, and matched rules.
+              </p>
+            </a>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <a class="action-card" href="console.html">
+              <div class="card-icon">&gt;</div>
+              <h3>Console</h3>
+              <p>
+                Evaluate JavaScript inside the iframe and capture real console
+                output.
+              </p>
+            </a>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <a class="action-card" href="network.html">
+              <div class="card-icon">⇄</div>
+              <h3>Network Viewer</h3>
+              <p>
+                Hook iframe fetch and XMLHttpRequest calls with timing and
+                response previews.
+              </p>
+            </a>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <a class="action-card" href="performance.html">
+              <div class="card-icon">↯</div>
+              <h3>Performance Monitor</h3>
+              <p>
+                Track real FPS, memory availability, stress timing, and
+                recording snapshots.
+              </p>
+            </a>
+          </div>
+          <div class="col-md-6 col-xl-4">
+            <a class="action-card" href="settings.html">
+              <div class="card-icon">⚙</div>
+              <h3>Settings</h3>
+              <p>
+                Manage branding, theme, compact navigation, exports, imports,
+                and resets.
+              </p>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div
+      class="modal fade"
+      id="htmlEditorModal"
+      tabindex="-1"
+      aria-labelledby="htmlEditorTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div>
+              <h2 class="modal-title fs-5" id="htmlEditorTitle">
+                Edit Target HTML
+              </h2>
+              <p class="panel-subtitle">
+                Paste a complete HTML document or fragment to inspect.
+              </p>
+            </div>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <textarea
+              id="targetHtmlEditor"
+              class="form-control code-editor html-editor"
+              spellcheck="false"
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-cyber" id="saveHtmlBtn">
+              Save target HTML
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

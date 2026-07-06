@@ -1,0 +1,83 @@
+.settings-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.settings-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.setting-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.14);
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+}
+
+.setting-copy h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.setting-copy p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.danger-zone {
+  border-color: rgba(251, 113, 133, 0.38);
+}
+
+.danger-zone .panel-header {
+  border-color: rgba(251, 113, 133, 0.32);
+}
+
+.import-box {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.workspace-summary {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.12);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
+.summary-row span:first-child {
+  color: var(--muted);
+}
+
+.summary-row span:last-child {
+  color: var(--cyan);
+}
+
+@media (max-width: 980px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .setting-row {
+    grid-template-columns: 1fr;
+  }
+}

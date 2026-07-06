@@ -1,0 +1,114 @@
+.performance-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.perf-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.chart-wrap {
+  min-height: 360px;
+  padding: 1rem;
+}
+
+#fpsChart {
+  width: 100% !important;
+  min-height: 320px;
+}
+
+.recording-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.snapshot-list {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 610px;
+  overflow: auto;
+}
+
+.snapshot-card {
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(2, 6, 16, 0.5);
+}
+
+.snapshot-card h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.snapshot-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 0.65rem;
+  margin: 0.7rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.snapshot-card dt {
+  color: var(--muted);
+}
+
+.snapshot-card dd {
+  margin: 0;
+  color: var(--text);
+  text-align: right;
+}
+
+.stress-result {
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--purple-soft);
+  font-family: var(--mono);
+}
+
+.recording-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--red);
+  font-family: var(--mono);
+}
+
+.recording-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--red);
+  box-shadow: 0 0 0 rgba(251, 113, 133, 0.7);
+  animation: pulse-recording 1.2s infinite;
+}
+
+@keyframes pulse-recording {
+  0% {
+    box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.65);
+  }
+
+  100% {
+    box-shadow: 0 0 0 12px rgba(251, 113, 133, 0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .performance-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .perf-metrics {
+    grid-template-columns: 1fr;
+  }
+}

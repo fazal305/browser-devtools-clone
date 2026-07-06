@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browser DevTools Clone | Settings</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="css/settings.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div id="sidebarRoot"></div>
+
+      <main class="main-content">
+        <div class="topbar">
+          <div>
+            <p class="page-kicker">Workspace controls</p>
+            <h1 class="page-title">Settings</h1>
+            <p class="page-description">
+              Configure the DevTools shell, export/import the workspace, and
+              manage persisted target data.
+            </p>
+          </div>
+          <div class="status-region" aria-live="polite"></div>
+        </div>
+
+        <section class="settings-layout">
+          <div class="settings-form">
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Interface Settings</h2>
+                  <p class="panel-subtitle">Stored in workspace.settings</p>
+                </div>
+                <button
+                  class="btn btn-cyber btn-sm"
+                  id="saveSettingsBtn"
+                  type="button"
+                >
+                  Save settings
+                </button>
+              </div>
+              <div class="panel-body">
+                <div class="setting-row">
+                  <div class="setting-copy">
+                    <h3>Tool name</h3>
+                    <p>Brand label shown in the shared sidebar.</p>
+                  </div>
+                  <input class="form-control" id="toolNameInput" type="text" />
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-copy">
+                    <h3>Dark mode</h3>
+                    <p>Toggle between the dark developer UI and light mode.</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      id="darkModeToggle"
+                      type="checkbox"
+                      role="switch"
+                    />
+                    <label class="form-check-label" for="darkModeToggle"
+                      >Use dark mode</label
+                    >
+                  </div>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-copy">
+                    <h3>Compact sidebar</h3>
+                    <p>Collapse navigation labels on desktop screens.</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      id="compactSidebarToggle"
+                      type="checkbox"
+                      role="switch"
+                    />
+                    <label class="form-check-label" for="compactSidebarToggle"
+                      >Use compact sidebar</label
+                    >
+                  </div>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-copy">
+                    <h3>Console font size</h3>
+                    <p>Controls monospace console output size.</p>
+                  </div>
+                  <input
+                    class="form-range"
+                    id="consoleFontSizeInput"
+                    type="range"
+                    min="11"
+                    max="20"
+                    step="1"
+                  />
+                </div>
+                <p class="panel-subtitle">
+                  Current console font size:
+                  <span id="consoleFontSizeLabel">14</span>px
+                </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Workspace Import / Export</h2>
+                  <p class="panel-subtitle">
+                    Move target HTML and captured logs between browsers
+                  </p>
+                </div>
+              </div>
+              <div class="panel-body import-box">
+                <button
+                  class="btn btn-cyber"
+                  id="exportWorkspaceBtn"
+                  type="button"
+                >
+                  Export full workspace JSON
+                </button>
+                <label class="form-label" for="importWorkspaceInput"
+                  >Import workspace JSON</label
+                >
+                <input
+                  class="form-control"
+                  id="importWorkspaceInput"
+                  type="file"
+                  accept="application/json,.json"
+                />
+              </div>
+            </div>
+
+            <div class="panel danger-zone">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Reset And Clear</h2>
+                  <p class="panel-subtitle">Destructive localStorage actions</p>
+                </div>
+              </div>
+              <div class="panel-body d-flex flex-wrap gap-2">
+                <button class="btn btn-ghost" id="resetDemoBtn" type="button">
+                  Reset target page to default sample
+                </button>
+                <button
+                  class="btn btn-ghost"
+                  id="clearCapturedBtn"
+                  type="button"
+                >
+                  Clear captured data
+                </button>
+                <button
+                  class="btn btn-outline-danger"
+                  id="clearWorkspaceBtn"
+                  type="button"
+                >
+                  Clear localStorage entirely
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Workspace Summary</h2>
+                <p class="panel-subtitle">Current persisted data counts</p>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="workspace-summary" id="workspaceSummary"></div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/settings.js"></script>
+  </body>
+</html>

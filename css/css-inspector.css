@@ -1,0 +1,146 @@
+.css-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 40%) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.css-tools {
+  display: grid;
+  gap: 1rem;
+}
+
+.computed-list,
+.inline-style-list,
+.rule-list,
+.class-list {
+  display: grid;
+  gap: 0.5rem;
+  max-height: 340px;
+  overflow: auto;
+}
+
+.style-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) auto;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(2, 6, 16, 0.45);
+}
+
+.computed-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.9fr) minmax(0, 1.2fr);
+  gap: 0.5rem;
+  padding: 0.45rem 0.55rem;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.12);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.computed-row .property {
+  color: var(--cyan);
+}
+
+.computed-row .value {
+  color: var(--text);
+  word-break: break-word;
+}
+
+.box-model {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  font-family: var(--mono);
+}
+
+.box-layer {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 78px;
+  padding: 1.1rem;
+  border: 1px solid var(--yellow);
+  background: rgba(250, 204, 21, 0.08);
+  color: var(--yellow);
+}
+
+.box-layer.border-layer {
+  border-color: var(--purple);
+  background: rgba(168, 85, 247, 0.08);
+  color: var(--purple);
+}
+
+.box-layer.padding-layer {
+  border-color: var(--green);
+  background: rgba(74, 222, 128, 0.08);
+  color: var(--green);
+}
+
+.box-layer.content-layer {
+  min-height: 70px;
+  border-color: var(--cyan);
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--cyan);
+}
+
+.class-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--cyan-soft);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.rule-card {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(2, 6, 16, 0.48);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.rule-selector {
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.rule-body {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+
+.add-style-row,
+.add-class-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 0.5rem;
+}
+
+.add-class-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+@media (max-width: 1080px) {
+  .css-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .style-row,
+  .add-style-row,
+  .add-class-row {
+    grid-template-columns: 1fr;
+  }
+}

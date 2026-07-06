@@ -1,0 +1,113 @@
+.console-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 42%) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.console-output {
+  min-height: 520px;
+  max-height: 620px;
+  overflow: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(1, 4, 12, 0.86);
+  font-size: var(--console-font-size, 14px);
+}
+
+.console-row {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  padding: 0.48rem 0.6rem;
+  border-left: 3px solid var(--muted);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.08);
+}
+
+.console-row.level-log {
+  border-left-color: var(--cyan);
+}
+
+.console-row.level-info {
+  border-left-color: var(--green);
+}
+
+.console-row.level-warn {
+  border-left-color: var(--yellow);
+}
+
+.console-row.level-error {
+  border-left-color: var(--red);
+}
+
+.console-row.level-result {
+  border-left-color: var(--purple);
+}
+
+.console-level {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.console-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.console-time {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.console-command-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.prompt-mark {
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-weight: 900;
+}
+
+.level-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.level-filter.active {
+  color: #001018;
+  border-color: var(--cyan);
+  background: var(--cyan);
+}
+
+.console-help {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.console-help code {
+  color: var(--cyan);
+}
+
+@media (max-width: 1060px) {
+  .console-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .console-row {
+    grid-template-columns: 1fr;
+  }
+
+  .console-command-row {
+    grid-template-columns: 1fr;
+  }
+}
