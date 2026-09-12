@@ -9,7 +9,7 @@ const defaultTargetHtml = `<!doctype html>
     :root { color-scheme: dark; }
     body {
       margin: 0;
-      font-family: Inter, system-ui, sans-serif;
+      font-family: "Hanken Grotesk", system-ui, sans-serif;
       color: #f8fbff;
       background: linear-gradient(135deg, #08111f, #111827 52%, #24113f);
     }
