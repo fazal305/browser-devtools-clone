@@ -128,196 +128,200 @@ const defaultTargetHtml = `<!doctype html>
 </html>`;
 
 const defaultWorkspace = {
-    settings: {
-        toolName: "NightCity DevTools",
-        darkMode: true,
-        compactSidebar: false,
-        consoleFontSize: 14
+  settings: {
+    toolName: "NightCity DevTools",
+    darkMode: true,
+    compactSidebar: false,
+    consoleFontSize: 14,
+  },
+  targetHtml: defaultTargetHtml,
+  selectedElementPath: "",
+  styleOverrides: {},
+  consoleHistory: [
+    {
+      id: "console-seed-1",
+      entryType: "output",
+      level: "log",
+      content: "NightCity target page loaded",
+      createdAt: new Date().toISOString(),
     },
-    targetHtml: defaultTargetHtml,
-    selectedElementPath: "",
-    styleOverrides: {},
-    consoleHistory: [
-        {
-            id: "console-seed-1",
-            entryType: "output",
-            level: "log",
-            content: "NightCity target page loaded",
-            createdAt: new Date().toISOString()
-        },
-        {
-            id: "console-seed-2",
-            entryType: "input",
-            level: "log",
-            content: "document.title",
-            createdAt: new Date().toISOString()
-        }
-    ],
-    networkLog: [
-        {
-            id: "network-seed-1",
-            method: "GET",
-            url: "https://jsonplaceholder.typicode.com/posts/1",
-            status: 200,
-            requestType: "fetch",
-            sizeBytes: 1240,
-            durationMs: 182,
-            requestHeaders: {},
-            responseHeaders: { "content-type": "application/json" },
-            responseBodyPreview: "{ id: 1, title: 'Sample post' }",
-            startedAt: new Date().toISOString()
-        },
-        {
-            id: "network-seed-2",
-            method: "GET",
-            url: "https://api.example.com/private/report",
-            status: 404,
-            requestType: "XHR",
-            sizeBytes: 318,
-            durationMs: 96,
-            requestHeaders: {},
-            responseHeaders: { "content-type": "application/json" },
-            responseBodyPreview: "{ error: 'Not found' }",
-            startedAt: new Date().toISOString()
-        },
-        {
-            id: "network-seed-3",
-            method: "POST",
-            url: "https://api.example.com/metrics",
-            status: 500,
-            requestType: "fetch",
-            sizeBytes: 820,
-            durationMs: 244,
-            requestHeaders: { "content-type": "application/json" },
-            responseHeaders: {},
-            responseBodyPreview: "Internal server error",
-            startedAt: new Date().toISOString()
-        }
-    ],
-    performanceLog: [
-        {
-            id: "perf-seed-1",
-            label: "Baseline Recording",
-            avgFps: 58,
-            minFps: 44,
-            maxFps: 61,
-            memoryUsedMB: 24.6,
-            durationMs: 10000,
-            createdAt: new Date().toISOString()
-        },
-        {
-            id: "perf-seed-2",
-            label: "Stress Test Snapshot",
-            avgFps: 51,
-            minFps: 35,
-            maxFps: 60,
-            memoryUsedMB: 31.2,
-            durationMs: 8000,
-            createdAt: new Date().toISOString()
-        }
-    ],
-    activityLog: [
-        {
-            id: "log-seed-1",
-            module: "Dashboard",
-            action: "Workspace seeded",
-            detail: "Default target page and demo logs were created",
-            createdAt: new Date().toISOString()
-        },
-        {
-            id: "log-seed-2",
-            module: "Network Viewer",
-            action: "Loaded sample requests",
-            detail: "Seeded fetch and XHR examples",
-            createdAt: new Date().toISOString()
-        },
-        {
-            id: "log-seed-3",
-            module: "Performance Monitor",
-            action: "Loaded snapshots",
-            detail: "Seeded baseline performance recordings",
-            createdAt: new Date().toISOString()
-        }
-    ]
+    {
+      id: "console-seed-2",
+      entryType: "input",
+      level: "log",
+      content: "document.title",
+      createdAt: new Date().toISOString(),
+    },
+  ],
+  networkLog: [
+    {
+      id: "network-seed-1",
+      method: "GET",
+      url: "https://jsonplaceholder.typicode.com/posts/1",
+      status: 200,
+      requestType: "fetch",
+      sizeBytes: 1240,
+      durationMs: 182,
+      requestHeaders: {},
+      responseHeaders: { "content-type": "application/json" },
+      responseBodyPreview: "{ id: 1, title: 'Sample post' }",
+      startedAt: new Date().toISOString(),
+    },
+    {
+      id: "network-seed-2",
+      method: "GET",
+      url: "https://api.example.com/private/report",
+      status: 404,
+      requestType: "XHR",
+      sizeBytes: 318,
+      durationMs: 96,
+      requestHeaders: {},
+      responseHeaders: { "content-type": "application/json" },
+      responseBodyPreview: "{ error: 'Not found' }",
+      startedAt: new Date().toISOString(),
+    },
+    {
+      id: "network-seed-3",
+      method: "POST",
+      url: "https://api.example.com/metrics",
+      status: 500,
+      requestType: "fetch",
+      sizeBytes: 820,
+      durationMs: 244,
+      requestHeaders: { "content-type": "application/json" },
+      responseHeaders: {},
+      responseBodyPreview: "Internal server error",
+      startedAt: new Date().toISOString(),
+    },
+  ],
+  performanceLog: [
+    {
+      id: "perf-seed-1",
+      label: "Baseline Recording",
+      avgFps: 58,
+      minFps: 44,
+      maxFps: 61,
+      memoryUsedMB: 24.6,
+      durationMs: 10000,
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: "perf-seed-2",
+      label: "Stress Test Snapshot",
+      avgFps: 51,
+      minFps: 35,
+      maxFps: 60,
+      memoryUsedMB: 31.2,
+      durationMs: 8000,
+      createdAt: new Date().toISOString(),
+    },
+  ],
+  activityLog: [
+    {
+      id: "log-seed-1",
+      module: "Dashboard",
+      action: "Workspace seeded",
+      detail: "Default target page and demo logs were created",
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: "log-seed-2",
+      module: "Network Viewer",
+      action: "Loaded sample requests",
+      detail: "Seeded fetch and XHR examples",
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: "log-seed-3",
+      module: "Performance Monitor",
+      action: "Loaded snapshots",
+      detail: "Seeded baseline performance recordings",
+      createdAt: new Date().toISOString(),
+    },
+  ],
 };
 
 function escapeHtml(str) {
-    return String(str ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function generateId(prefix) {
-    return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
 function formatTimestamp(dateString) {
-    const date = dateString ? new Date(dateString) : new Date();
-    if (Number.isNaN(date.getTime())) return "";
-    return date.toLocaleString();
+  const date = dateString ? new Date(dateString) : new Date();
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleString();
 }
 
 function cloneDefaultWorkspace() {
-    return JSON.parse(JSON.stringify(defaultWorkspace));
+  return JSON.parse(JSON.stringify(defaultWorkspace));
 }
 
 function loadWorkspace() {
-    const raw = localStorage.getItem(WORKSPACE_KEY);
-    if (!raw) {
-        const seeded = cloneDefaultWorkspace();
-        saveWorkspace(seeded);
-        return seeded;
-    }
+  const raw = localStorage.getItem(WORKSPACE_KEY);
+  if (!raw) {
+    const seeded = cloneDefaultWorkspace();
+    saveWorkspace(seeded);
+    return seeded;
+  }
 
-    try {
-        const parsed = JSON.parse(raw);
-        return $.extend(true, cloneDefaultWorkspace(), parsed);
-    } catch (error) {
-        console.warn("Workspace parse failed. Resetting workspace.", error);
-        return resetWorkspace();
-    }
+  try {
+    const parsed = JSON.parse(raw);
+    return $.extend(true, cloneDefaultWorkspace(), parsed);
+  } catch (error) {
+    console.warn("Workspace parse failed. Resetting workspace.", error);
+    return resetWorkspace();
+  }
 }
 
 function saveWorkspace(workspace) {
-    localStorage.setItem(WORKSPACE_KEY, JSON.stringify(workspace));
-    return workspace;
+  localStorage.setItem(WORKSPACE_KEY, JSON.stringify(workspace));
+  return workspace;
 }
 
 function resetWorkspace() {
-    const workspace = cloneDefaultWorkspace();
-    saveWorkspace(workspace);
-    return workspace;
+  const workspace = cloneDefaultWorkspace();
+  saveWorkspace(workspace);
+  return workspace;
 }
 
 function seedDefaultTargetPage() {
-    const workspace = loadWorkspace();
-    workspace.targetHtml = defaultTargetHtml;
-    addActivityLog("Dashboard", "Loaded sample target", "Default inspectable page restored");
-    saveWorkspace(workspace);
-    return workspace;
+  const workspace = loadWorkspace();
+  workspace.targetHtml = defaultTargetHtml;
+  addActivityLog(
+    "Dashboard",
+    "Loaded sample target",
+    "Default inspectable page restored",
+  );
+  saveWorkspace(workspace);
+  return workspace;
 }
 
 function addActivityLog(module, action, detail) {
-    const workspace = loadWorkspace();
-    workspace.activityLog = workspace.activityLog || [];
-    workspace.activityLog.unshift({
-        id: generateId("log"),
-        module,
-        action,
-        detail,
-        createdAt: new Date().toISOString()
-    });
-    workspace.activityLog = workspace.activityLog.slice(0, 80);
-    saveWorkspace(workspace);
+  const workspace = loadWorkspace();
+  workspace.activityLog = workspace.activityLog || [];
+  workspace.activityLog.unshift({
+    id: generateId("log"),
+    module,
+    action,
+    detail,
+    createdAt: new Date().toISOString(),
+  });
+  workspace.activityLog = workspace.activityLog.slice(0, 80);
+  saveWorkspace(workspace);
 }
 
 function renderTargetIframe(containerId) {
-    const workspace = loadWorkspace();
-    const iframeId = `${containerId}-iframe`;
-    const html = `
+  const workspace = loadWorkspace();
+  const iframeId = `${containerId}-iframe`;
+  const html = `
     <div class="target-toolbar">
       <span class="target-url">localStorage://workspace.targetHtml</span>
       <span class="badge-soft">live iframe</span>
@@ -327,40 +331,45 @@ function renderTargetIframe(containerId) {
     </div>
   `;
 
-    $(`#${containerId}`).html(html);
-    const iframe = document.getElementById(iframeId);
-    iframe.srcdoc = workspace.targetHtml || defaultTargetHtml;
-    return iframe;
+  $(`#${containerId}`).html(html);
+  const iframe = document.getElementById(iframeId);
+  iframe.srcdoc = workspace.targetHtml || defaultTargetHtml;
+  return iframe;
 }
 
 function getIframeDocument(iframeEl) {
-    return iframeEl ? iframeEl.contentDocument || iframeEl.contentWindow.document : null;
+  return iframeEl
+    ? iframeEl.contentDocument || iframeEl.contentWindow.document
+    : null;
 }
 
 function serializeIframeToTargetHtml(iframeEl) {
-    const doc = getIframeDocument(iframeEl);
-    if (!doc) return "";
-    return `<!doctype html>\n${doc.documentElement.outerHTML}`;
+  const doc = getIframeDocument(iframeEl);
+  if (!doc) return "";
+  return `<!doctype html>\n${doc.documentElement.outerHTML}`;
 }
 
 function buildDomTree(rootElement) {
-    function walk(node) {
-        if (!node || node.nodeType !== Node.ELEMENT_NODE) return "";
+  function walk(node) {
+    if (!node || node.nodeType !== Node.ELEMENT_NODE) return "";
 
-        const path = getElementPath(node);
-        const children = Array.from(node.children).map(walk).join("");
-        const attrs = Array.from(node.attributes || [])
-            .slice(0, 4)
-            .map((attr) => ` <span class="dom-attr">${escapeHtml(attr.name)}="${escapeHtml(attr.value)}"</span>`)
-            .join("");
-        const text = Array.from(node.childNodes)
-            .filter((child) => child.nodeType === Node.TEXT_NODE)
-            .map((child) => child.textContent.trim())
-            .filter(Boolean)
-            .join(" ")
-            .slice(0, 50);
+    const path = getElementPath(node);
+    const children = Array.from(node.children).map(walk).join("");
+    const attrs = Array.from(node.attributes || [])
+      .slice(0, 4)
+      .map(
+        (attr) =>
+          ` <span class="dom-attr">${escapeHtml(attr.name)}="${escapeHtml(attr.value)}"</span>`,
+      )
+      .join("");
+    const text = Array.from(node.childNodes)
+      .filter((child) => child.nodeType === Node.TEXT_NODE)
+      .map((child) => child.textContent.trim())
+      .filter(Boolean)
+      .join(" ")
+      .slice(0, 50);
 
-        return `
+    return `
       <div class="dom-branch" data-path="${escapeHtml(path)}">
         <div class="dom-node" data-path="${escapeHtml(path)}" style="padding-left:${Math.max(0, path.split(">").length - 1) * 14}px">
           <span class="dom-toggle">${children ? "▾" : "•"}</span>
@@ -370,88 +379,98 @@ function buildDomTree(rootElement) {
         ${children}
       </div>
     `;
-    }
+  }
 
-    return walk(rootElement);
+  return walk(rootElement);
 }
 
 function getElementPath(element) {
-    if (!element || !element.ownerDocument) return "";
-    const parts = [];
-    let current = element;
+  if (!element || !element.ownerDocument) return "";
+  const parts = [];
+  let current = element;
 
-    while (current && current.nodeType === Node.ELEMENT_NODE && current !== current.ownerDocument.documentElement.parentElement) {
-        const parent = current.parentElement;
-        if (!parent) {
-            parts.unshift(current.tagName.toLowerCase() + ":1");
-            break;
-        }
-
-        const sameTagSiblings = Array.from(parent.children).filter((child) => child.tagName === current.tagName);
-        const index = sameTagSiblings.indexOf(current) + 1;
-        parts.unshift(`${current.tagName.toLowerCase()}:${index}`);
-        current = parent;
+  while (
+    current &&
+    current.nodeType === Node.ELEMENT_NODE &&
+    current !== current.ownerDocument.documentElement.parentElement
+  ) {
+    const parent = current.parentElement;
+    if (!parent) {
+      parts.unshift(current.tagName.toLowerCase() + ":1");
+      break;
     }
 
-    return parts.join(">");
+    const sameTagSiblings = Array.from(parent.children).filter(
+      (child) => child.tagName === current.tagName,
+    );
+    const index = sameTagSiblings.indexOf(current) + 1;
+    parts.unshift(`${current.tagName.toLowerCase()}:${index}`);
+    current = parent;
+  }
+
+  return parts.join(">");
 }
 
 function resolveElementByPath(doc, path) {
-    if (!doc || !path) return null;
+  if (!doc || !path) return null;
 
-    const parts = path.split(">");
-    let current = doc.documentElement;
+  const parts = path.split(">");
+  let current = doc.documentElement;
 
-    for (let i = 0; i < parts.length; i += 1) {
-        const [tag, indexRaw] = parts[i].split(":");
-        const index = Number(indexRaw || 1) - 1;
+  for (let i = 0; i < parts.length; i += 1) {
+    const [tag, indexRaw] = parts[i].split(":");
+    const index = Number(indexRaw || 1) - 1;
 
-        if (i === 0) {
-            if (current.tagName.toLowerCase() !== tag) return null;
-            continue;
-        }
-
-        const matches = Array.from(current.children).filter((child) => child.tagName.toLowerCase() === tag);
-        current = matches[index];
-        if (!current) return null;
+    if (i === 0) {
+      if (current.tagName.toLowerCase() !== tag) return null;
+      continue;
     }
 
-    return current;
+    const matches = Array.from(current.children).filter(
+      (child) => child.tagName.toLowerCase() === tag,
+    );
+    current = matches[index];
+    if (!current) return null;
+  }
+
+  return current;
 }
 
 function highlightElementOverlay(iframeEl, element) {
-    const doc = getIframeDocument(iframeEl);
-    if (!doc || !element || !iframeEl.contentWindow) return;
+  const doc = getIframeDocument(iframeEl);
+  if (!doc || !element || !iframeEl.contentWindow) return;
 
-    doc.querySelectorAll(".devtools-highlight-overlay").forEach((overlay) => overlay.remove());
+  doc
+    .querySelectorAll(".devtools-highlight-overlay")
+    .forEach((overlay) => overlay.remove());
 
-    const rect = element.getBoundingClientRect();
-    const overlay = doc.createElement("div");
-    overlay.className = "devtools-highlight-overlay";
-    overlay.style.left = `${rect.left + iframeEl.contentWindow.scrollX}px`;
-    overlay.style.top = `${rect.top + iframeEl.contentWindow.scrollY}px`;
-    overlay.style.width = `${rect.width}px`;
-    overlay.style.height = `${rect.height}px`;
-    doc.body.appendChild(overlay);
+  const rect = element.getBoundingClientRect();
+  const overlay = doc.createElement("div");
+  overlay.className = "devtools-highlight-overlay";
+  overlay.style.left = `${rect.left + iframeEl.contentWindow.scrollX}px`;
+  overlay.style.top = `${rect.top + iframeEl.contentWindow.scrollY}px`;
+  overlay.style.width = `${rect.width}px`;
+  overlay.style.height = `${rect.height}px`;
+  doc.body.appendChild(overlay);
 
-    setTimeout(() => {
-        if (overlay.parentNode) overlay.remove();
-    }, 2200);
+  setTimeout(() => {
+    if (overlay.parentNode) overlay.remove();
+  }, 2200);
 }
 
 function renderSidebar(activePage) {
-    const workspace = loadWorkspace();
-    const nav = [
-        ["index.html", "Dashboard", "⌂", "dashboard"],
-        ["dom-inspector.html", "DOM Inspector", "{}", "dom"],
-        ["css-inspector.html", "CSS Inspector", "#", "css"],
-        ["console.html", "Console", ">", "console"],
-        ["network.html", "Network", "⇄", "network"],
-        ["performance.html", "Performance", "↯", "performance"],
-        ["settings.html", "Settings", "⚙", "settings"]
-    ];
+  const workspace = loadWorkspace();
+  const nav = [
+    ["index.html", "Dashboard", "⌂", "dashboard"],
+    ["dom-inspector.html", "DOM Inspector", "{}", "dom"],
+    ["css-inspector.html", "CSS Inspector", "#", "css"],
+    ["console.html", "Console", ">", "console"],
+    ["network.html", "Network", "⇄", "network"],
+    ["performance.html", "Performance", "↯", "performance"],
+    ["settings.html", "Settings", "⚙", "settings"],
+  ];
 
-    return `
+  return `
     <aside class="sidebar">
       <div class="sidebar-brand">
         <div class="brand-mark">ND</div>
@@ -461,14 +480,18 @@ function renderSidebar(activePage) {
         </div>
       </div>
       <ul class="nav-list">
-        ${nav.map(([href, label, icon, key]) => `
+        ${nav
+          .map(
+            ([href, label, icon, key]) => `
           <li>
             <a class="nav-link ${activePage === key ? "active" : ""}" href="${href}" data-page="${key}">
               <span class="nav-icon">${escapeHtml(icon)}</span>
               <span class="nav-label">${escapeHtml(label)}</span>
             </a>
           </li>
-        `).join("")}
+        `,
+          )
+          .join("")}
       </ul>
       <div class="sidebar-footer">
         <strong>Workspace:</strong><br>
@@ -479,84 +502,92 @@ function renderSidebar(activePage) {
 }
 
 function setActiveNav() {
-    const file = window.location.pathname.split("/").pop() || "index.html";
-    $(".nav-link").removeClass("active");
-    $(`.nav-link[href="${file}"]`).addClass("active");
+  const file = window.location.pathname.split("/").pop() || "index.html";
+  $(".nav-link").removeClass("active");
+  $(`.nav-link[href="${file}"]`).addClass("active");
 }
 
 function showStatus(message, type = "success") {
-    const html = `<div class="status-message ${escapeHtml(type)}">${escapeHtml(message)}</div>`;
-    const target = $(".status-region").first();
+  const html = `<div class="status-message ${escapeHtml(type)}">${escapeHtml(message)}</div>`;
+  const target = $(".status-region").first();
 
-    if (target.length) {
-        target.html(html);
-        setTimeout(() => target.empty(), 3600);
-    } else {
-        console.log(message);
-    }
+  if (target.length) {
+    target.html(html);
+    setTimeout(() => target.empty(), 3600);
+  } else {
+    console.log(message);
+  }
 }
 
 function renderEmptyState(message) {
-    return `<div class="empty-state">${escapeHtml(message)}</div>`;
+  return `<div class="empty-state">${escapeHtml(message)}</div>`;
 }
 
 function downloadJson(filename, data) {
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 function copyText(text, message = "Copied to clipboard") {
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => showStatus(message));
-        return;
-    }
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => showStatus(message));
+    return;
+  }
 
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    textarea.remove();
-    showStatus(message);
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+  showStatus(message);
 }
 
 function applyThemeSettings() {
-    const workspace = loadWorkspace();
-    const settings = workspace.settings || {};
-    document.body.classList.toggle("light-mode", !settings.darkMode);
-    document.body.classList.toggle("compact-sidebar", Boolean(settings.compactSidebar));
-    document.documentElement.style.setProperty("--console-font-size", `${settings.consoleFontSize || 14}px`);
+  const workspace = loadWorkspace();
+  const settings = workspace.settings || {};
+  document.body.classList.toggle("light-mode", !settings.darkMode);
+  document.body.classList.toggle(
+    "compact-sidebar",
+    Boolean(settings.compactSidebar),
+  );
+  document.documentElement.style.setProperty(
+    "--console-font-size",
+    `${settings.consoleFontSize || 14}px`,
+  );
 }
 
 function formatBytes(bytes) {
-    const value = Number(bytes) || 0;
-    if (value < 1024) return `${value} B`;
-    if (value < 1024 * 1024) return `${(value / 1024).toFixed(1)} KB`;
-    return `${(value / (1024 * 1024)).toFixed(1)} MB`;
+  const value = Number(bytes) || 0;
+  if (value < 1024) return `${value} B`;
+  if (value < 1024 * 1024) return `${(value / 1024).toFixed(1)} KB`;
+  return `${(value / (1024 * 1024)).toFixed(1)} MB`;
 }
 
 function slugify(text) {
-    return String(text || "")
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
+  return String(text || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function countDomNodesFromHtml(html) {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.querySelectorAll("*").length;
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.querySelectorAll("*").length;
 }
 
 $(function () {
-    loadWorkspace();
-    applyThemeSettings();
-    setActiveNav();
+  loadWorkspace();
+  applyThemeSettings();
+  setActiveNav();
 });
