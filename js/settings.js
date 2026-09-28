@@ -1,130 +1,145 @@
 function renderSettingsForm() {
-    const workspace = loadWorkspace();
-    const settings = workspace.settings || defaultWorkspace.settings;
+  const workspace = loadWorkspace();
+  const settings = workspace.settings || defaultWorkspace.settings;
 
-    $("#toolNameInput").val(settings.toolName || "NightCity DevTools");
-    $("#darkModeToggle").prop("checked", Boolean(settings.darkMode));
-    $("#compactSidebarToggle").prop("checked", Boolean(settings.compactSidebar));
-    $("#consoleFontSizeInput").val(settings.consoleFontSize || 14);
-    $("#consoleFontSizeLabel").text(settings.consoleFontSize || 14);
+  $("#toolNameInput").val(settings.toolName || "NightCity DevTools");
+  $("#darkModeToggle").prop("checked", Boolean(settings.darkMode));
+  $("#compactSidebarToggle").prop("checked", Boolean(settings.compactSidebar));
+  $("#consoleFontSizeInput").val(settings.consoleFontSize || 14);
+  $("#consoleFontSizeLabel").text(settings.consoleFontSize || 14);
 
-    renderWorkspaceSummary();
+  renderWorkspaceSummary();
 }
 
 function saveSettings() {
-    const workspace = loadWorkspace();
+  const workspace = loadWorkspace();
 
-    workspace.settings = {
-        toolName: $("#toolNameInput").val().trim() || "NightCity DevTools",
-        darkMode: $("#darkModeToggle").is(":checked"),
-        compactSidebar: $("#compactSidebarToggle").is(":checked"),
-        consoleFontSize: Number($("#consoleFontSizeInput").val()) || 14
-    };
+  workspace.settings = {
+    toolName: $("#toolNameInput").val().trim() || "NightCity DevTools",
+    darkMode: $("#darkModeToggle").is(":checked"),
+    compactSidebar: $("#compactSidebarToggle").is(":checked"),
+    consoleFontSize: Number($("#consoleFontSizeInput").val()) || 14,
+  };
 
-    saveWorkspace(workspace);
-    addActivityLog("Settings", "Saved settings", "Updated interface settings");
-    $("#sidebarRoot").replaceWith(renderSidebar("settings"));
-    applyThemeSettings();
-    setActiveNav();
-    renderSettingsForm();
-    showStatus("Settings saved.", "success");
+  saveWorkspace(workspace);
+  addActivityLog("Settings", "Saved settings", "Updated interface settings");
+  $("#sidebarRoot").replaceWith(renderSidebar("settings"));
+  applyThemeSettings();
+  setActiveNav();
+  renderSettingsForm();
+  showStatus("Settings saved.", "success");
 }
 
 function toggleDarkMode() {
-    const workspace = loadWorkspace();
-    workspace.settings.darkMode = $("#darkModeToggle").is(":checked");
-    saveWorkspace(workspace);
-    applyThemeSettings();
+  const workspace = loadWorkspace();
+  workspace.settings.darkMode = $("#darkModeToggle").is(":checked");
+  saveWorkspace(workspace);
+  applyThemeSettings();
 }
 
 function toggleCompactSidebar() {
-    const workspace = loadWorkspace();
-    workspace.settings.compactSidebar = $("#compactSidebarToggle").is(":checked");
-    saveWorkspace(workspace);
-    applyThemeSettings();
+  const workspace = loadWorkspace();
+  workspace.settings.compactSidebar = $("#compactSidebarToggle").is(":checked");
+  saveWorkspace(workspace);
+  applyThemeSettings();
 }
 
 function exportWorkspace() {
-    const workspace = loadWorkspace();
-    downloadJson("browser-devtools-workspace.json", {
-        exportedAt: new Date().toISOString(),
-        workspace
-    });
+  const workspace = loadWorkspace();
+  downloadJson("browser-devtools-workspace.json", {
+    exportedAt: new Date().toISOString(),
+    workspace,
+  });
 
-    addActivityLog("Settings", "Exported workspace", "Downloaded full workspace JSON");
-    renderWorkspaceSummary();
-    showStatus("Workspace export started.", "success");
+  addActivityLog(
+    "Settings",
+    "Exported workspace",
+    "Downloaded full workspace JSON",
+  );
+  renderWorkspaceSummary();
+  showStatus("Workspace export started.", "success");
 }
 
 function importWorkspace(event) {
-    const file = event.target.files && event.target.files[0];
+  const file = event.target.files && event.target.files[0];
 
-    if (!file) return;
+  if (!file) return;
 
-    const reader = new FileReader();
+  const reader = new FileReader();
 
-    reader.onload = function () {
-        try {
-            const parsed = JSON.parse(reader.result);
-            const importedWorkspace = parsed.workspace || parsed;
+  reader.onload = function () {
+    try {
+      const parsed = JSON.parse(reader.result);
+      const importedWorkspace = parsed.workspace || parsed;
 
-            const merged = $.extend(true, cloneDefaultWorkspace(), importedWorkspace);
-            saveWorkspace(merged);
-            addActivityLog("Settings", "Imported workspace", `Imported ${file.name}`);
+      const merged = $.extend(true, cloneDefaultWorkspace(), importedWorkspace);
+      saveWorkspace(merged);
+      addActivityLog("Settings", "Imported workspace", `Imported ${file.name}`);
 
-            $("#sidebarRoot").replaceWith(renderSidebar("settings"));
-            applyThemeSettings();
-            setActiveNav();
-            renderSettingsForm();
-            showStatus("Workspace imported successfully.", "success");
-        } catch (error) {
-            showStatus("Import failed. The selected file is not valid workspace JSON.", "danger");
-        }
+      $("#sidebarRoot").replaceWith(renderSidebar("settings"));
+      applyThemeSettings();
+      setActiveNav();
+      renderSettingsForm();
+      showStatus("Workspace imported successfully.", "success");
+    } catch (error) {
+      showStatus(
+        "Import failed. The selected file is not valid workspace JSON.",
+        "danger",
+      );
+    }
 
-        $("#importWorkspaceInput").val("");
-    };
+    $("#importWorkspaceInput").val("");
+  };
 
-    reader.readAsText(file);
+  reader.readAsText(file);
 }
 
 function resetDemoWorkspace() {
-    const workspace = loadWorkspace();
-    workspace.targetHtml = defaultTargetHtml;
-    workspace.selectedElementPath = "";
-    saveWorkspace(workspace);
+  const workspace = loadWorkspace();
+  workspace.targetHtml = defaultTargetHtml;
+  workspace.selectedElementPath = "";
+  saveWorkspace(workspace);
 
-    addActivityLog("Settings", "Reset target page", "Restored default sample target HTML");
-    renderWorkspaceSummary();
-    showStatus("Default sample target restored.", "success");
+  addActivityLog(
+    "Settings",
+    "Reset target page",
+    "Restored default sample target HTML",
+  );
+  renderWorkspaceSummary();
+  showStatus("Default sample target restored.", "success");
 }
 
 function clearCapturedData() {
-    const workspace = loadWorkspace();
-    workspace.consoleHistory = [];
-    workspace.networkLog = [];
-    workspace.performanceLog = [];
-    saveWorkspace(workspace);
+  const workspace = loadWorkspace();
+  workspace.consoleHistory = [];
+  workspace.networkLog = [];
+  workspace.performanceLog = [];
+  saveWorkspace(workspace);
 
-    addActivityLog("Settings", "Cleared captured data", "Removed console, network, and performance logs");
-    renderWorkspaceSummary();
-    showStatus("Captured data cleared.", "success");
+  addActivityLog(
+    "Settings",
+    "Cleared captured data",
+    "Removed console, network, and performance logs",
+  );
+  renderWorkspaceSummary();
+  showStatus("Captured data cleared.", "success");
 }
 
 function clearWorkspace() {
-    localStorage.removeItem(WORKSPACE_KEY);
-    resetWorkspace();
+  localStorage.removeItem(WORKSPACE_KEY);
+  resetWorkspace();
 
-    $("#sidebarRoot").replaceWith(renderSidebar("settings"));
-    applyThemeSettings();
-    setActiveNav();
-    renderSettingsForm();
-    showStatus("Workspace reset to defaults.", "success");
+  $("#sidebarRoot").replaceWith(renderSidebar("settings"));
+  applyThemeSettings();
+  setActiveNav();
+  renderSettingsForm();
+  showStatus("Workspace reset to defaults.", "success");
 }
 
 function renderWorkspaceSummary() {
-    const workspace = loadWorkspace();
+  const workspace = loadWorkspace();
 
-    $("#workspaceSummary").html(`
+  $("#workspaceSummary").html(`
     <div class="summary-row">
       <span>Tool name</span>
       <span>${escapeHtml(workspace.settings.toolName)}</span>
@@ -157,26 +172,26 @@ function renderWorkspaceSummary() {
 }
 
 function bindSettingsEvents() {
-    $("#saveSettingsBtn").on("click", saveSettings);
-    $("#darkModeToggle").on("change", toggleDarkMode);
-    $("#compactSidebarToggle").on("change", toggleCompactSidebar);
+  $("#saveSettingsBtn").on("click", saveSettings);
+  $("#darkModeToggle").on("change", toggleDarkMode);
+  $("#compactSidebarToggle").on("change", toggleCompactSidebar);
 
-    $("#consoleFontSizeInput").on("input", function () {
-        $("#consoleFontSizeLabel").text($(this).val());
-    });
+  $("#consoleFontSizeInput").on("input", function () {
+    $("#consoleFontSizeLabel").text($(this).val());
+  });
 
-    $("#exportWorkspaceBtn").on("click", exportWorkspace);
-    $("#importWorkspaceInput").on("change", importWorkspace);
-    $("#resetDemoBtn").on("click", resetDemoWorkspace);
-    $("#clearCapturedBtn").on("click", clearCapturedData);
-    $("#clearWorkspaceBtn").on("click", clearWorkspace);
+  $("#exportWorkspaceBtn").on("click", exportWorkspace);
+  $("#importWorkspaceInput").on("change", importWorkspace);
+  $("#resetDemoBtn").on("click", resetDemoWorkspace);
+  $("#clearCapturedBtn").on("click", clearCapturedData);
+  $("#clearWorkspaceBtn").on("click", clearWorkspace);
 }
 
 $(function () {
-    $("#sidebarRoot").replaceWith(renderSidebar("settings"));
-    applyThemeSettings();
-    setActiveNav();
+  $("#sidebarRoot").replaceWith(renderSidebar("settings"));
+  applyThemeSettings();
+  setActiveNav();
 
-    renderSettingsForm();
-    bindSettingsEvents();
+  renderSettingsForm();
+  bindSettingsEvents();
 });
